@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bookshop.mapper.TsjyHisMapper" >
+  <resultMap id="BaseResultMap" type="com.bookshop.pojo.po.TsjyHis" >
+    <id column="tsjy_id" property="tsjyId" jdbcType="INTEGER" />
+    <result column="ts_id" property="tsId" jdbcType="INTEGER" />
+    <result column="u_id" property="uId" jdbcType="INTEGER" />
+    <result column="tsjy_stime" property="tsjyStime" jdbcType="VARCHAR" />
+    <result column="tsjy_ftime" property="tsjyFtime" jdbcType="VARCHAR" />
+    <result column="tsjy_num" property="tsjyNum" jdbcType="INTEGER" />
+    <result column="jyzt_id" property="jyztId" jdbcType="INTEGER" />
+    <result column="tsjy_cost" property="tsjyCost" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tsjy_id, ts_id, u_id, tsjy_stime, tsjy_ftime, tsjy_num, jyzt_id, tsjy_cost
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bookshop.pojo.po.TsjyHisExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tsjy_his
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsjy_his
+    where tsjy_id = #{tsjyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tsjy_his
+    where tsjy_id = #{tsjyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bookshop.pojo.po.TsjyHisExample" >
+    delete from tsjy_his
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bookshop.pojo.po.TsjyHis" >
+    insert into tsjy_his (tsjy_id, ts_id, u_id, 
+      tsjy_stime, tsjy_ftime, tsjy_num, 
+      jyzt_id, tsjy_cost)
+    values (#{tsjyId,jdbcType=INTEGER}, #{tsId,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, 
+      #{tsjyStime,jdbcType=VARCHAR}, #{tsjyFtime,jdbcType=VARCHAR}, #{tsjyNum,jdbcType=INTEGER}, 
+      #{jyztId,jdbcType=INTEGER}, #{tsjyCost,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bookshop.pojo.po.TsjyHis" >
+    insert into tsjy_his
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tsjyId != null" >
+        tsjy_id,
+      </if>
+      <if test="tsId != null" >
+        ts_id,
+      </if>
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="tsjyStime != null" >
+        tsjy_stime,
+      </if>
+      <if test="tsjyFtime != null" >
+        tsjy_ftime,
+      </if>
+      <if test="tsjyNum != null" >
+        tsjy_num,
+      </if>
+      <if test="jyztId != null" >
+        jyzt_id,
+      </if>
+      <if test="tsjyCost != null" >
+        tsjy_cost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tsjyId != null" >
+        #{tsjyId,jdbcType=INTEGER},
+      </if>
+      <if test="tsId != null" >
+        #{tsId,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null" >
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="tsjyStime != null" >
+        #{tsjyStime,jdbcType=VARCHAR},
+      </if>
+      <if test="tsjyFtime != null" >
+        #{tsjyFtime,jdbcType=VARCHAR},
+      </if>
+      <if test="tsjyNum != null" >
+        #{tsjyNum,jdbcType=INTEGER},
+      </if>
+      <if test="jyztId != null" >
+        #{jyztId,jdbcType=INTEGER},
+      </if>
+      <if test="tsjyCost != null" >
+        #{tsjyCost,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bookshop.pojo.po.TsjyHisExample" resultType="java.lang.Integer" >
+    select count(*) from tsjy_his
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tsjy_his
+    <set >
+      <if test="record.tsjyId != null" >
+        tsjy_id = #{record.tsjyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tsId != null" >
+        ts_id = #{record.tsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uId != null" >
+        u_id = #{record.uId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tsjyStime != null" >
+        tsjy_stime = #{record.tsjyStime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsjyFtime != null" >
+        tsjy_ftime = #{record.tsjyFtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsjyNum != null" >
+        tsjy_num = #{record.tsjyNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.jyztId != null" >
+        jyzt_id = #{record.jyztId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tsjyCost != null" >
+        tsjy_cost = #{record.tsjyCost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tsjy_his
+    set tsjy_id = #{record.tsjyId,jdbcType=INTEGER},
+      ts_id = #{record.tsId,jdbcType=INTEGER},
+      u_id = #{record.uId,jdbcType=INTEGER},
+      tsjy_stime = #{record.tsjyStime,jdbcType=VARCHAR},
+      tsjy_ftime = #{record.tsjyFtime,jdbcType=VARCHAR},
+      tsjy_num = #{record.tsjyNum,jdbcType=INTEGER},
+      jyzt_id = #{record.jyztId,jdbcType=INTEGER},
+      tsjy_cost = #{record.tsjyCost,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bookshop.pojo.po.TsjyHis" >
+    update tsjy_his
+    <set >
+      <if test="tsId != null" >
+        ts_id = #{tsId,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null" >
+        u_id = #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="tsjyStime != null" >
+        tsjy_stime = #{tsjyStime,jdbcType=VARCHAR},
+      </if>
+      <if test="tsjyFtime != null" >
+        tsjy_ftime = #{tsjyFtime,jdbcType=VARCHAR},
+      </if>
+      <if test="tsjyNum != null" >
+        tsjy_num = #{tsjyNum,jdbcType=INTEGER},
+      </if>
+      <if test="jyztId != null" >
+        jyzt_id = #{jyztId,jdbcType=INTEGER},
+      </if>
+      <if test="tsjyCost != null" >
+        tsjy_cost = #{tsjyCost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where tsjy_id = #{tsjyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bookshop.pojo.po.TsjyHis" >
+    update tsjy_his
+    set ts_id = #{tsId,jdbcType=INTEGER},
+      u_id = #{uId,jdbcType=INTEGER},
+      tsjy_stime = #{tsjyStime,jdbcType=VARCHAR},
+      tsjy_ftime = #{tsjyFtime,jdbcType=VARCHAR},
+      tsjy_num = #{tsjyNum,jdbcType=INTEGER},
+      jyzt_id = #{jyztId,jdbcType=INTEGER},
+      tsjy_cost = #{tsjyCost,jdbcType=DOUBLE}
+    where tsjy_id = #{tsjyId,jdbcType=INTEGER}
+  </update>
+</mapper>

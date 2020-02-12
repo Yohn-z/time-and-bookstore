@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bookshop.mapper.LibSkztMapper" >
+  <resultMap id="BaseResultMap" type="com.bookshop.pojo.po.LibSkzt" >
+    <id column="skzt_id" property="skztId" jdbcType="INTEGER" />
+    <result column="skzt_name" property="skztName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    skzt_id, skzt_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bookshop.pojo.po.LibSkztExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lib_skzt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lib_skzt
+    where skzt_id = #{skztId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lib_skzt
+    where skzt_id = #{skztId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bookshop.pojo.po.LibSkztExample" >
+    delete from lib_skzt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bookshop.pojo.po.LibSkzt" >
+    insert into lib_skzt (skzt_id, skzt_name)
+    values (#{skztId,jdbcType=INTEGER}, #{skztName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bookshop.pojo.po.LibSkzt" >
+    insert into lib_skzt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="skztId != null" >
+        skzt_id,
+      </if>
+      <if test="skztName != null" >
+        skzt_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="skztId != null" >
+        #{skztId,jdbcType=INTEGER},
+      </if>
+      <if test="skztName != null" >
+        #{skztName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bookshop.pojo.po.LibSkztExample" resultType="java.lang.Integer" >
+    select count(*) from lib_skzt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lib_skzt
+    <set >
+      <if test="record.skztId != null" >
+        skzt_id = #{record.skztId,jdbcType=INTEGER},
+      </if>
+      <if test="record.skztName != null" >
+        skzt_name = #{record.skztName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lib_skzt
+    set skzt_id = #{record.skztId,jdbcType=INTEGER},
+      skzt_name = #{record.skztName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bookshop.pojo.po.LibSkzt" >
+    update lib_skzt
+    <set >
+      <if test="skztName != null" >
+        skzt_name = #{skztName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where skzt_id = #{skztId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bookshop.pojo.po.LibSkzt" >
+    update lib_skzt
+    set skzt_name = #{skztName,jdbcType=VARCHAR}
+    where skzt_id = #{skztId,jdbcType=INTEGER}
+  </update>
+</mapper>

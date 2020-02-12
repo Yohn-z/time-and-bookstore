@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bookshop.mapper.LibUsersMapper" >
+  <resultMap id="BaseResultMap" type="com.bookshop.pojo.po.LibUsers" >
+    <id column="u_id" property="uId" jdbcType="INTEGER" />
+    <result column="u_name" property="uName" jdbcType="VARCHAR" />
+    <result column="u_pass" property="uPass" jdbcType="VARCHAR" />
+    <result column="u_time" property="uTime" jdbcType="VARCHAR" />
+    <result column="u_sex" property="uSex" jdbcType="VARCHAR" />
+    <result column="u_tel" property="uTel" jdbcType="VARCHAR" />
+    <result column="u_debt" property="uDebt" jdbcType="DOUBLE" />
+    <result column="u_picurl" property="uPicurl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    u_id, u_name, u_pass, u_time, u_sex, u_tel, u_debt, u_picurl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bookshop.pojo.po.LibUsersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lib_users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lib_users
+    where u_id = #{uId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lib_users
+    where u_id = #{uId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bookshop.pojo.po.LibUsersExample" >
+    delete from lib_users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bookshop.pojo.po.LibUsers" >
+    insert into lib_users (u_id, u_name, u_pass, 
+      u_time, u_sex, u_tel, 
+      u_debt, u_picurl)
+    values (#{uId,jdbcType=INTEGER}, #{uName,jdbcType=VARCHAR}, #{uPass,jdbcType=VARCHAR}, 
+      #{uTime,jdbcType=VARCHAR}, #{uSex,jdbcType=VARCHAR}, #{uTel,jdbcType=VARCHAR}, 
+      #{uDebt,jdbcType=DOUBLE}, #{uPicurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bookshop.pojo.po.LibUsers" >
+    insert into lib_users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="uName != null" >
+        u_name,
+      </if>
+      <if test="uPass != null" >
+        u_pass,
+      </if>
+      <if test="uTime != null" >
+        u_time,
+      </if>
+      <if test="uSex != null" >
+        u_sex,
+      </if>
+      <if test="uTel != null" >
+        u_tel,
+      </if>
+      <if test="uDebt != null" >
+        u_debt,
+      </if>
+      <if test="uPicurl != null" >
+        u_picurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="uName != null" >
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uPass != null" >
+        #{uPass,jdbcType=VARCHAR},
+      </if>
+      <if test="uTime != null" >
+        #{uTime,jdbcType=VARCHAR},
+      </if>
+      <if test="uSex != null" >
+        #{uSex,jdbcType=VARCHAR},
+      </if>
+      <if test="uTel != null" >
+        #{uTel,jdbcType=VARCHAR},
+      </if>
+      <if test="uDebt != null" >
+        #{uDebt,jdbcType=DOUBLE},
+      </if>
+      <if test="uPicurl != null" >
+        #{uPicurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bookshop.pojo.po.LibUsersExample" resultType="java.lang.Integer" >
+    select count(*) from lib_users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lib_users
+    <set >
+      <if test="record.uId != null" >
+        u_id = #{record.uId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uName != null" >
+        u_name = #{record.uName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uPass != null" >
+        u_pass = #{record.uPass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uTime != null" >
+        u_time = #{record.uTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uSex != null" >
+        u_sex = #{record.uSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uTel != null" >
+        u_tel = #{record.uTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uDebt != null" >
+        u_debt = #{record.uDebt,jdbcType=DOUBLE},
+      </if>
+      <if test="record.uPicurl != null" >
+        u_picurl = #{record.uPicurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lib_users
+    set u_id = #{record.uId,jdbcType=INTEGER},
+      u_name = #{record.uName,jdbcType=VARCHAR},
+      u_pass = #{record.uPass,jdbcType=VARCHAR},
+      u_time = #{record.uTime,jdbcType=VARCHAR},
+      u_sex = #{record.uSex,jdbcType=VARCHAR},
+      u_tel = #{record.uTel,jdbcType=VARCHAR},
+      u_debt = #{record.uDebt,jdbcType=DOUBLE},
+      u_picurl = #{record.uPicurl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bookshop.pojo.po.LibUsers" >
+    update lib_users
+    <set >
+      <if test="uName != null" >
+        u_name = #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uPass != null" >
+        u_pass = #{uPass,jdbcType=VARCHAR},
+      </if>
+      <if test="uTime != null" >
+        u_time = #{uTime,jdbcType=VARCHAR},
+      </if>
+      <if test="uSex != null" >
+        u_sex = #{uSex,jdbcType=VARCHAR},
+      </if>
+      <if test="uTel != null" >
+        u_tel = #{uTel,jdbcType=VARCHAR},
+      </if>
+      <if test="uDebt != null" >
+        u_debt = #{uDebt,jdbcType=DOUBLE},
+      </if>
+      <if test="uPicurl != null" >
+        u_picurl = #{uPicurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bookshop.pojo.po.LibUsers" >
+    update lib_users
+    set u_name = #{uName,jdbcType=VARCHAR},
+      u_pass = #{uPass,jdbcType=VARCHAR},
+      u_time = #{uTime,jdbcType=VARCHAR},
+      u_sex = #{uSex,jdbcType=VARCHAR},
+      u_tel = #{uTel,jdbcType=VARCHAR},
+      u_debt = #{uDebt,jdbcType=DOUBLE},
+      u_picurl = #{uPicurl,jdbcType=VARCHAR}
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+</mapper>

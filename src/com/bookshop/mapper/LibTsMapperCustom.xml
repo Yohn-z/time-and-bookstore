@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bookshop.mapper.LibTsMapperCustom" >
+ <select id="getLibTsCustomList" resultType="com.bookshop.pojo.vo.LibTsCustom">
+SELECT
+	t.ts_id tsId,
+	t.tslb_name tslbName,
+	t.ts_name tsName,
+	t.ts_author tsAuthor,
+	t.ts_publisher tsPublisher,
+	t.ts_pupblishtime tsPupblishtime,
+	t.ts_time tsTime,
+	t.ts_price tsPrice,
+	t.ts_detail tsDetail,
+	t.ts_sum tsSum,
+	t.ts_onnum tsOnnum,
+	t.skzt_id skztId,
+	s.skzt_name skztName
+FROM
+	lib_ts t,
+	lib_skzt s
+WHERE
+	t.skzt_id = s.skzt_id
+ </select>
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bookshop.mapper.LibTsMapper" >
+  <resultMap id="BaseResultMap" type="com.bookshop.pojo.po.LibTs" >
+    <id column="ts_id" property="tsId" jdbcType="INTEGER" />
+    <result column="tslb_name" property="tslbName" jdbcType="VARCHAR" />
+    <result column="ts_name" property="tsName" jdbcType="VARCHAR" />
+    <result column="ts_author" property="tsAuthor" jdbcType="VARCHAR" />
+    <result column="ts_publisher" property="tsPublisher" jdbcType="VARCHAR" />
+    <result column="ts_pupblishtime" property="tsPupblishtime" jdbcType="VARCHAR" />
+    <result column="ts_time" property="tsTime" jdbcType="VARCHAR" />
+    <result column="ts_detail" property="tsDetail" jdbcType="VARCHAR" />
+    <result column="ts_price" property="tsPrice" jdbcType="DOUBLE" />
+    <result column="ts_sum" property="tsSum" jdbcType="INTEGER" />
+    <result column="ts_onnum" property="tsOnnum" jdbcType="INTEGER" />
+    <result column="skzt_id" property="skztId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ts_id, tslb_name, ts_name, ts_author, ts_publisher, ts_pupblishtime, ts_time, ts_detail, 
+    ts_price, ts_sum, ts_onnum, skzt_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bookshop.pojo.po.LibTsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lib_ts
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lib_ts
+    where ts_id = #{tsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lib_ts
+    where ts_id = #{tsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bookshop.pojo.po.LibTsExample" >
+    delete from lib_ts
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bookshop.pojo.po.LibTs" >
+    insert into lib_ts (ts_id, tslb_name, ts_name, 
+      ts_author, ts_publisher, ts_pupblishtime, 
+      ts_time, ts_detail, ts_price, 
+      ts_sum, ts_onnum, skzt_id
+      )
+    values (#{tsId,jdbcType=INTEGER}, #{tslbName,jdbcType=VARCHAR}, #{tsName,jdbcType=VARCHAR}, 
+      #{tsAuthor,jdbcType=VARCHAR}, #{tsPublisher,jdbcType=VARCHAR}, #{tsPupblishtime,jdbcType=VARCHAR}, 
+      #{tsTime,jdbcType=VARCHAR}, #{tsDetail,jdbcType=VARCHAR}, #{tsPrice,jdbcType=DOUBLE}, 
+      #{tsSum,jdbcType=INTEGER}, #{tsOnnum,jdbcType=INTEGER}, #{skztId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bookshop.pojo.po.LibTs" >
+    insert into lib_ts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tsId != null" >
+        ts_id,
+      </if>
+      <if test="tslbName != null" >
+        tslb_name,
+      </if>
+      <if test="tsName != null" >
+        ts_name,
+      </if>
+      <if test="tsAuthor != null" >
+        ts_author,
+      </if>
+      <if test="tsPublisher != null" >
+        ts_publisher,
+      </if>
+      <if test="tsPupblishtime != null" >
+        ts_pupblishtime,
+      </if>
+      <if test="tsTime != null" >
+        ts_time,
+      </if>
+      <if test="tsDetail != null" >
+        ts_detail,
+      </if>
+      <if test="tsPrice != null" >
+        ts_price,
+      </if>
+      <if test="tsSum != null" >
+        ts_sum,
+      </if>
+      <if test="tsOnnum != null" >
+        ts_onnum,
+      </if>
+      <if test="skztId != null" >
+        skzt_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tsId != null" >
+        #{tsId,jdbcType=INTEGER},
+      </if>
+      <if test="tslbName != null" >
+        #{tslbName,jdbcType=VARCHAR},
+      </if>
+      <if test="tsName != null" >
+        #{tsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tsAuthor != null" >
+        #{tsAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="tsPublisher != null" >
+        #{tsPublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="tsPupblishtime != null" >
+        #{tsPupblishtime,jdbcType=VARCHAR},
+      </if>
+      <if test="tsTime != null" >
+        #{tsTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tsDetail != null" >
+        #{tsDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="tsPrice != null" >
+        #{tsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="tsSum != null" >
+        #{tsSum,jdbcType=INTEGER},
+      </if>
+      <if test="tsOnnum != null" >
+        #{tsOnnum,jdbcType=INTEGER},
+      </if>
+      <if test="skztId != null" >
+        #{skztId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bookshop.pojo.po.LibTsExample" resultType="java.lang.Integer" >
+    select count(*) from lib_ts
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lib_ts
+    <set >
+      <if test="record.tsId != null" >
+        ts_id = #{record.tsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tslbName != null" >
+        tslb_name = #{record.tslbName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsName != null" >
+        ts_name = #{record.tsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsAuthor != null" >
+        ts_author = #{record.tsAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsPublisher != null" >
+        ts_publisher = #{record.tsPublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsPupblishtime != null" >
+        ts_pupblishtime = #{record.tsPupblishtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsTime != null" >
+        ts_time = #{record.tsTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsDetail != null" >
+        ts_detail = #{record.tsDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsPrice != null" >
+        ts_price = #{record.tsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tsSum != null" >
+        ts_sum = #{record.tsSum,jdbcType=INTEGER},
+      </if>
+      <if test="record.tsOnnum != null" >
+        ts_onnum = #{record.tsOnnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.skztId != null" >
+        skzt_id = #{record.skztId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lib_ts
+    set ts_id = #{record.tsId,jdbcType=INTEGER},
+      tslb_name = #{record.tslbName,jdbcType=VARCHAR},
+      ts_name = #{record.tsName,jdbcType=VARCHAR},
+      ts_author = #{record.tsAuthor,jdbcType=VARCHAR},
+      ts_publisher = #{record.tsPublisher,jdbcType=VARCHAR},
+      ts_pupblishtime = #{record.tsPupblishtime,jdbcType=VARCHAR},
+      ts_time = #{record.tsTime,jdbcType=VARCHAR},
+      ts_detail = #{record.tsDetail,jdbcType=VARCHAR},
+      ts_price = #{record.tsPrice,jdbcType=DOUBLE},
+      ts_sum = #{record.tsSum,jdbcType=INTEGER},
+      ts_onnum = #{record.tsOnnum,jdbcType=INTEGER},
+      skzt_id = #{record.skztId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bookshop.pojo.po.LibTs" >
+    update lib_ts
+    <set >
+      <if test="tslbName != null" >
+        tslb_name = #{tslbName,jdbcType=VARCHAR},
+      </if>
+      <if test="tsName != null" >
+        ts_name = #{tsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tsAuthor != null" >
+        ts_author = #{tsAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="tsPublisher != null" >
+        ts_publisher = #{tsPublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="tsPupblishtime != null" >
+        ts_pupblishtime = #{tsPupblishtime,jdbcType=VARCHAR},
+      </if>
+      <if test="tsTime != null" >
+        ts_time = #{tsTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tsDetail != null" >
+        ts_detail = #{tsDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="tsPrice != null" >
+        ts_price = #{tsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="tsSum != null" >
+        ts_sum = #{tsSum,jdbcType=INTEGER},
+      </if>
+      <if test="tsOnnum != null" >
+        ts_onnum = #{tsOnnum,jdbcType=INTEGER},
+      </if>
+      <if test="skztId != null" >
+        skzt_id = #{skztId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ts_id = #{tsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bookshop.pojo.po.LibTs" >
+    update lib_ts
+    set tslb_name = #{tslbName,jdbcType=VARCHAR},
+      ts_name = #{tsName,jdbcType=VARCHAR},
+      ts_author = #{tsAuthor,jdbcType=VARCHAR},
+      ts_publisher = #{tsPublisher,jdbcType=VARCHAR},
+      ts_pupblishtime = #{tsPupblishtime,jdbcType=VARCHAR},
+      ts_time = #{tsTime,jdbcType=VARCHAR},
+      ts_detail = #{tsDetail,jdbcType=VARCHAR},
+      ts_price = #{tsPrice,jdbcType=DOUBLE},
+      ts_sum = #{tsSum,jdbcType=INTEGER},
+      ts_onnum = #{tsOnnum,jdbcType=INTEGER},
+      skzt_id = #{skztId,jdbcType=INTEGER}
+    where ts_id = #{tsId,jdbcType=INTEGER}
+  </update>
+</mapper>
